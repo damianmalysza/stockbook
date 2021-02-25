@@ -10,4 +10,3 @@ ActiveRecord::Base.establish_connection(
 
 require './app/controllers/application_controller'
 require_all 'app'
-api_key = YAML.load_file('./api_key.yml')["api_key"]
