@@ -35,9 +35,4 @@ class StocksController < ApplicationController
     redirect "/stocks"
   end
 
-  helpers do
-    def valid_stock?(ticker)
-      !!Stock.new(ticker: ticker).current_price
-    end
-  end
 end
