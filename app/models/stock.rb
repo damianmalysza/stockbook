@@ -8,7 +8,15 @@ class Stock < ActiveRecord::Base
 
   base_uri "https://cloud.iexapis.com/stable/tops?token=#{@@api_key}&"
 
+  def self.get_stock_info(ticker)
+    get("symbols=#{ticker}")
+  end
+  
+  def self.valid_ticker?(ticker)
+    !get_stock_info(ticker).empty?
+  end
+  
   def current_price
-    self.class.get("symbols=#{self.ticker}")[0]["lastSalePrice"]
+    self.class.get_stock_info(self.ticker)[0]["lastSalePrice"].round(2)
   end
 end

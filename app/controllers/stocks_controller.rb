@@ -34,4 +34,10 @@ class StocksController < ApplicationController
   delete "/stocks/:id/delete" do
     redirect "/stocks"
   end
+
+  helpers do
+    def valid_stock?(ticker)
+      !!Stock.new(ticker: ticker).current_price
+    end
+  end
 end
