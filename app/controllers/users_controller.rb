@@ -4,23 +4,31 @@ class UsersController < ApplicationController
     
   end
 
+  post '/signup' do
+    
+  end
+
   get '/login' do
     
   end
 
-  post "/users" do
-    redirect "/users"
+  post '/login' do
+    
   end
 
-  get "/users/:id" do
+  get '/logout' do
+    
+  end
+
+  get "/users/:username" do
     erb :"/users/show.html"
   end
 
-  get "/users/:id/edit" do
+  get "/users/:username/edit" do
     erb :"/users/edit.html"
   end
 
-  patch "/users/:id" do
+  patch "/users/:username" do
     redirect "/users/:id"
   end
 
