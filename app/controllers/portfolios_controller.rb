@@ -2,6 +2,7 @@ class PortfoliosController < ApplicationController
 
   # GET: /portfolios
   get "/portfolios" do
+    @portfolios = Portfolio.all
     erb :"/portfolios/index.html"
   end
 
