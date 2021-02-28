@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   get '/signup' do
-    
+    #make sure to do validation to ensure that username isn't already in the database
   end
 
   post '/signup' do
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     redirect "/users/:id"
   end
 
-  delete "/users/:id/delete" do
+  delete "/users/:username/delete" do
     redirect "/users"
   end
 
