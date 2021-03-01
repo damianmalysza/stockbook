@@ -12,12 +12,13 @@ class UsersController < ApplicationController
       redirect '/signup'
     else
       User.create(params)
+      session[:username] = params[:username]
       redirect '/' #TODO - change this to render the portfolio view page for the user once that gets coded
     end
   end
 
   get '/login' do
-    
+    erb :"users/login"
   end
 
   post '/login' do
@@ -25,7 +26,8 @@ class UsersController < ApplicationController
   end
 
   get '/logout' do
-    
+    session.clear
+    redirect '/'
   end
 
   get "/users/:username" do
