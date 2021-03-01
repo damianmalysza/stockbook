@@ -22,11 +22,15 @@ class UsersController < ApplicationController
   end
   
   get '/login' do
-    erb :"users/login"
+    if logged_in?
+      redirect '/'
+    else
+      erb :"users/login"
+    end
   end
   
   post '/login' do
-    
+    user = User.find_by(username: params[:username])
   end
   
   get '/logout' do
