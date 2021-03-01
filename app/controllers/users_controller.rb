@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       redirect '/signup'
     else
       User.create(params)
-      redirect '/'
+      redirect '/' #TODO - change this to render the portfolio view page for the user once that gets coded
     end
   end
 

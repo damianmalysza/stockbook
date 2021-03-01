@@ -3,7 +3,7 @@
 <% if flash.has?(:message) %>
   <div id="flash_message"><%= flash[:message]%></div>
 <% end %>
-
+<div class="wrapper">
 <form action="/signup" method="post">
 <label for="username">Username: </label>
 <input type="text" name="username" id="username">
@@ -13,3 +13,4 @@
 <br>
 <input type="submit" value="Create Account">
 </form>
+</div>
