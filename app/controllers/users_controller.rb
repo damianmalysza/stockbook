@@ -3,12 +3,17 @@ require 'rack-flash'
 class UsersController < ApplicationController
 
   get '/signup' do
-    # binding.pry
     erb :"users/signup"
   end
 
   post '/signup' do
-    
+    if User.find_by(username: params[:username])
+      flash[:message] = "Username already taken - please use another one"
+      redirect '/signup'
+    else
+      User.create(params)
+      redirect '/'
+    end
   end
 
   get '/login' do
