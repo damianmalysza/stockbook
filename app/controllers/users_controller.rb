@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
 
   get '/signup' do
-    #make sure to do validation to ensure that username isn't already in the database
+    
+    erb :"users/signup"
   end
 
   post '/signup' do

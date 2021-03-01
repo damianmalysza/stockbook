@@ -111,6 +111,8 @@ GEM
       rack-protection (= 2.1.0)
       sinatra (= 2.1.0)
       tilt (~> 2.0)
+    sinatra-flash (0.3.0)
+      sinatra (>= 1.0.0)
     sqlite3 (1.3.13)
     thin (1.8.0)
       daemons (~> 1.0, >= 1.0.9)
@@ -147,6 +149,7 @@ DEPENDENCIES
   sinatra
   sinatra-activerecord
   sinatra-config-file
+  sinatra-flash
   sqlite3 (~> 1.3.6)
   thin
   tux
