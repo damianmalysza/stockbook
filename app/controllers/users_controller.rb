@@ -1,7 +1,9 @@
+require 'rack-flash'
+
 class UsersController < ApplicationController
 
   get '/signup' do
-    
+    # binding.pry
     erb :"users/signup"
   end
 
