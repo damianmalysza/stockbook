@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   
   get '/signup' do
     if logged_in?
-      redirect '/'
+      redirect '/' #TODO - change this to render the portfolio view page for the user once that gets coded
     else
       erb :"users/signup"
     end
@@ -31,6 +31,14 @@ class UsersController < ApplicationController
   
   post '/login' do
     user = User.find_by(username: params[:username])
+    
+    if user && user.authenticate(params[:password])
+      session[:username] = user.username
+      redirect '/' #TODO - change this to render the portfolio view page for the user that gets coded
+    else
+      flash[:message] = "Username or password incorrect - please try again"
+      redirect '/login'
+    end
   end
   
   get '/logout' do
