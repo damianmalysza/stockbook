@@ -14,6 +14,11 @@
     <nav>
       <div><a href="/">Home</a></div>
       <div><a href="/portfolios">Portfolios</a></div>
+      
+      <% if logged_in? %>
+        <div>Logged in as: <%= current_user.username%></div>
+      <% end %>
+      
     </nav>
     <div class="wrapper">
 
