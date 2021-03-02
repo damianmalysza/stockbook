@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     else
       User.create(params)
       session[:username] = params[:username]
-      redirect "/users/#{user.username}"
+      redirect "/users/#{current_user.username}"
     end
   end
   
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   
   post '/login' do
     user = User.find_by(username: params[:username])
-
+    
     if user && user.authenticate(params[:password])
       session[:username] = user.username
       redirect "/users/#{user.username}"
@@ -56,11 +56,27 @@ class UsersController < ApplicationController
   end
   
   get "/users/:username/edit" do
-    erb :"/users/edit"
+    @user = User.find_by(username:params[:username])
+    if @user && @user == current_user
+      erb :"/users/edit"
+    else
+      redirect '/'
+    end
   end
   
   patch "/users/:username" do
-    redirect "/users/:id"
+    if params[:updated_username] == current_user.username
+      flash[:message] = "Username entered is the same - no updates made"
+      redirect "/users/#{current_user.username}/edit"
+    elsif User.find_by(username: params[:updated_username])
+      flash[:message] = "Username already taken - please use another one"
+      redirect "/users/#{current_user.username}/edit"
+    else
+      user = User.find_by(username:params[:username])
+      user.update(username:params[:updated_username])
+      session[:username] = user.username
+      redirect "/users/#{user.username}"
+    end 
   end
   
   delete "/users/:username/delete" do
