@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   
   post '/login' do
     user = User.find_by(username: params[:username])
-    
+
     if user && user.authenticate(params[:password])
       session[:username] = user.username
       redirect '/' #TODO - change this to render the portfolio view page for the user that gets coded
@@ -42,16 +42,16 @@ class UsersController < ApplicationController
   end
   
   get '/logout' do
-    session.clear
+    session.clear if logged_in?
     redirect '/'
   end
   
   get "/users/:username" do
-    erb :"/users/show.html"
+    erb :"/users/show"
   end
   
   get "/users/:username/edit" do
-    erb :"/users/edit.html"
+    erb :"/users/edit"
   end
   
   patch "/users/:username" do
