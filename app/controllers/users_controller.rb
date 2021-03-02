@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   
   get '/signup' do
     if logged_in?
-      redirect '/' #TODO - change this to render the portfolio view page for the user once that gets coded
+      redirect "/users/#{current_user.username}"
     else
       erb :"users/signup"
     end
@@ -17,13 +17,13 @@ class UsersController < ApplicationController
     else
       User.create(params)
       session[:username] = params[:username]
-      redirect '/' #TODO - change this to render the portfolio view page for the user once that gets coded
+      redirect "/users/#{user.username}"
     end
   end
   
   get '/login' do
     if logged_in?
-      redirect '/'
+      redirect "/users/#{current_user.username}"
     else
       erb :"users/login"
     end
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 
     if user && user.authenticate(params[:password])
       session[:username] = user.username
-      redirect '/' #TODO - change this to render the portfolio view page for the user that gets coded
+      redirect "/users/#{user.username}"
     else
       flash[:message] = "Username or password incorrect - please try again"
       redirect '/login'
@@ -47,7 +47,12 @@ class UsersController < ApplicationController
   end
   
   get "/users/:username" do
-    erb :"/users/show"
+    @user = User.find_by(username:params[:username])
+    if @user
+      erb :"/users/show"
+    else 
+      redirect '/'
+    end
   end
   
   get "/users/:username/edit" do
