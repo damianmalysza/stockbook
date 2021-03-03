@@ -1,10 +1,16 @@
 <div class="container">
 <h1>Stockbook</h1>
-<div>Stockbook is a web application to help you track your stock portfolio performance and and see how your portfolio is performing compared to others.</div>
+<div>Stockbook is a web application to help you better organize and track the performance of the stock market. With this app, you'll be able to:
+<ul>
+<li>Create <em>'watchlists'</em> to organize buckets of stocks you'd like to track</li>
+<li>View the current price of each stock inside each watchlist</li>
+<li>View other users' watchlists to see what stocks other users are tracking</li>
+</ul>
+</div>
 <br>
 <% unless logged_in? %>
 <div id="signup-login-box">
-Signup or Login Below
+<strong>Signup or Login Below</strong>
 <div><a href="/signup">Signup</a></div>
 <div><a href="/login">Login</a></div>
 </div>
