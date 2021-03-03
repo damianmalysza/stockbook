@@ -12,13 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2021_02_24_233433) do
 
-  create_table "portfolios", force: :cascade do |t|
-    t.integer "user_id"
-  end
-
-  create_table "stock_portfolios", force: :cascade do |t|
+  create_table "stock_watchlists", force: :cascade do |t|
     t.integer "stock_id"
-    t.integer "portfolio_id"
+    t.integer "watchlist_id"
   end
 
   create_table "stocks", force: :cascade do |t|
@@ -29,6 +25,11 @@ ActiveRecord::Schema.define(version: 2021_02_24_233433) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
+  end
+
+  create_table "watchlists", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
   end
 
 end

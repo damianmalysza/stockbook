@@ -2,6 +2,6 @@ require './config/environment'
 
 use Rack::MethodOverride
 use UsersController
-use PortfoliosController
+use WatchlistsController
 use StocksController
 run ApplicationController
