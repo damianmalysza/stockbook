@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300&display=swap');
 
-html {
+*{
   font-family: 'Titillium Web', sans-serif;
+}
+
+html {
   display: grid;
   justify-items: center;
   background: rgb(219, 231, 194);
@@ -67,4 +70,16 @@ a, a:hover, a:focus, a:active {
 
 #signup-login-box>div:hover {
   background-color: rgb(241, 241, 241);
+}
+
+input[type=submit] {
+  margin-top: .5rem;
+  background-color: rgb(219, 231, 194);
+  text-decoration: none;
+  color: inherit;
+}
+
+input[type=submit]:hover {
+  background-color: rgb(241, 241, 241);
+  cursor: pointer;
 }
