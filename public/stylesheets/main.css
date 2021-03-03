@@ -15,6 +15,7 @@ nav {
 }
 
 nav div {
+  border: solid 1px black;
   padding: 1rem;
 }
 
@@ -30,4 +31,9 @@ footer {
   background-color: #f83e06;
   border-color: #e93b06;
   color: #ffffff;
+}
+
+a, a:hover, a:focus, a:active {
+  text-decoration: none;
+  color: inherit;
 }
