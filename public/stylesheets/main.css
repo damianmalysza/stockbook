@@ -2,25 +2,33 @@
 
 html {
   font-family: 'Titillium Web', sans-serif;
+  display: grid;
+  justify-items: center;
+  background: rgb(219, 231, 194);
 }
 
 body {
   margin: 0;
+  width: 75%;
   box-sizing: border-box;
-}
+} 
 
 nav {
   display: flex;
-  width: 100%;
 }
 
 nav div {
-  border: solid 1px black;
   padding: 1rem;
 }
 
+main {
+  margin: 1rem;
+}
+
 footer {
-  margin-top: 1rem;
+  grid-area: foot;
+  position: absolute;
+  bottom: 0;
 }
 
 #current-user {
