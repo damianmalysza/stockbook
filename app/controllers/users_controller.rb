@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   end
   
   post '/signup' do
+    params[:username] = params[:username].downcase
     if User.find_by(username: params[:username])
       flash[:message] = "Username already taken - please use another one"
       redirect '/signup'
