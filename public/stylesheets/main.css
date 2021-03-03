@@ -45,3 +45,26 @@ a, a:hover, a:focus, a:active {
   text-decoration: none;
   color: inherit;
 }
+
+#signup-login-box {
+  border: 1px solid black;
+  padding-bottom: .5rem;
+  display: flex;
+  flex-direction: column;
+  min-width: 20%;
+  align-items: center;
+}
+
+#signup-login-box>div {
+  border: 1px solid black;
+  display: inline-block;
+  margin-top: .5rem;
+  min-width: 25%;
+  max-width: 100%;
+  text-align: center;
+  box-shadow: black 1px;
+}
+
+#signup-login-box>div:hover {
+  background-color: rgb(241, 241, 241);
+}

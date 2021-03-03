@@ -1,12 +1,12 @@
 <div class="container">
 <h1>Stockbook</h1>
 <div>Stockbook is a web application to help you track your stock portfolio performance and and see how your portfolio is performing compared to others.</div>
-
+<br>
 <% unless logged_in? %>
-<div>
+<div id="signup-login-box">
 Signup or Login Below
-<form action="/signup" method="get"><input type="submit" value="Signup"></form>
-<form action="/login" method="get"><input type="submit" value="Login"></form>
+<div><a href="/signup">Signup</a></div>
+<div><a href="/login">Login</a></div>
 </div>
 </div>
 <% end %>
