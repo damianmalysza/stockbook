@@ -2,7 +2,7 @@
 <form action="/users/<%=@user.username%>" method="post">
 <input type="hidden" name="_method" value="patch">
 <% if flash.has?(:message) %>
-  <div id="flash_message"><%= flash[:message]%></div>
+  <div id="flash-message"><%= flash[:message]%></div>
 <% end %>
 <label for="updated_username">Update your username here:</label>
 <input type="text" name="updated_username" id="updated_username" value="<%=@user.username%>" required>
