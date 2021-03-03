@@ -47,6 +47,7 @@ footer {
   color: #ffffff;
   padding: 0 5px 0 5px;
   display: inline-block;
+  margin-bottom: .5rem;
 }
 
 a, a:hover, a:focus, a:active {
