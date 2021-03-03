@@ -1,5 +1,14 @@
-<h1>Welcome, <%=@user.username%></h1>
+<h1><%=@user.username.capitalize%>'s Profile</h1>
+<% if @user == current_user %>
+  <div class="profile-edit">
+  <h3>Modify Profile</h3>
+  <div><a href="/users/<%=@user.username%>/edit">Edit Username</a></div>
+  <div>insert link to edit watchlist</div>
+  <div>insert link to add watchlist</div>
+  </div>
+<% end %>
 
-<div class="portfolio-container">
+<br>
+<div class="watchlist-container">
 Render watchlists here eventually
 </div>
