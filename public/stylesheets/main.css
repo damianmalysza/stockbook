@@ -37,8 +37,9 @@ footer {
 
 #flash-message {
   background-color: #f83e06;
-  border-color: #e93b06;
   color: #ffffff;
+  padding: 0 5px 0 5px;
+  display: inline-block;
 }
 
 a, a:hover, a:focus, a:active {
