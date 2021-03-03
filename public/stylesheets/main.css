@@ -24,6 +24,10 @@ nav div {
   padding: 1rem;
 }
 
+nav div:hover {
+  background-color: rgb(241, 241, 241);
+}
+
 main {
   margin: 1rem;
 }
