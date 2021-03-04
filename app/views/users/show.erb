@@ -1,4 +1,4 @@
-<h1><%=@user.username.capitalize%>'s Profile</h1>
+<h1><%=@user.username.capitalize%>'s Watchlists</h1>
 <% if @user == current_user %>
   <div class="profile-edit">
   <h3>Modify Profile</h3>
@@ -9,5 +9,22 @@
 
 <br>
 <div class="watchlist-container">
-Render watchlists here eventually
+<% if @user.watchlists.length != 0 %>
+<% @user.watchlists.each do |watchlist| %>
+<ul>
+<li><%=watchlist.name%>
+
+<% if watchlist.stocks != 0 %>
+<ul>
+  <% watchlist.stocks.each do |stock| %>
+    <li><%=stock.ticker%> - $<%=stock.current_price%></li>
+  <% end %>
+  </ul>
+<% end %>
+
+</li>
+</ul>
+<% end %>
+<% end %>
+
 </div>
