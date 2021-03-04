@@ -26,7 +26,7 @@ class WatchlistsController < ApplicationController
     end
   
     watchlist = Watchlist.create(name:params[:watchlist][:name])
-    watchlist.stocks << new_stock
+    watchlist.stocks << new_stock unless params[:stock][:new_stock].empty? 
 
     if params[:watchlist][:stocks]
       stocks = params[:watchlist][:stocks]
