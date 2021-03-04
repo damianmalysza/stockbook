@@ -7,6 +7,11 @@ class WatchlistsController < ApplicationController
   
   get "/watchlists/new" do
     if logged_in?
+      if Stock.all.empty?
+        @stocks = []
+      else 
+        @stocks = Stock.all.sort_by {|stock| stock.ticker.downcase}
+      end
       erb :"/watchlists/new"
     else
       redirect '/'

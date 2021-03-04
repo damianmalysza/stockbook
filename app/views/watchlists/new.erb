@@ -5,11 +5,11 @@
 <br>
 <br>
 
-<% unless Stock.all.empty? %>
+<% unless @stocks.empty? %>
 <label for="watchlist_stocks">Select Stocks from our Database to Add:</label>
 <br>
 <select name="watchlist[stocks][]" id="watchlist_stocks" multiple>
-<% Stock.all.each do |stock| %>
+<% @stocks.each do |stock| %>
   <option value=<%=stock.ticker%>><%=stock.ticker.upcase%></option>
 <% end %>
 </select>

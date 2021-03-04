@@ -17,7 +17,7 @@
 <% if watchlist.stocks != 0 %>
 <ul>
   <% watchlist.stocks.each do |stock| %>
-    <li><%=stock.ticker%> - $<%=stock.current_price%></li>
+    <li><%=stock.ticker.upcase%> - $<%=stock.current_price%></li>
   <% end %>
   </ul>
 <% end %>
