@@ -1,1 +1,26 @@
 <h1>Create New Watchlist</h1>
+<form action="/watchlists" method="post">
+<label for="watchlist_name">Name Your Watchlist:</label>
+<input type="text" name="watchlist[name]" id="watchlist_name" required>
+<br>
+<br>
+
+<% unless Stock.all.empty? %>
+<label for="watchlist_stocks">Select Stocks from our Database to Add:</label>
+<select name="watchlist[stocks][]" id="watchlist_stocks">
+<% Stock.all.each do |stock| %>
+  <option value=<%=stock.ticker%>><%=stock.ticker.upcase%></option>
+<% end %>
+</select>
+<br>
+<span class="footnote"><em>Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.</em></span>
+<% end %>
+<br>
+<br>
+<label for="new_stock">If your stock isn't listed above, you can add it here (use ticker name):</label>
+<input type="text" name="stock[new_stock]" id="new_stock">
+<br>
+<span class="footnote"><em>You'll be able to add more stocks later!</em></span>
+<br>
+<input type="submit" value="Create Watchlist">
+</form>

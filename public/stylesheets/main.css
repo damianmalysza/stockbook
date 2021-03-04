@@ -115,3 +115,7 @@ div.profile-edit {
 .profile-edit>div {
   padding: .25rem;
 }
+
+.footnote {
+  font-size: .75rem;
+}
