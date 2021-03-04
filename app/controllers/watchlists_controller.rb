@@ -1,17 +1,13 @@
 class WatchlistsController < ApplicationController
   
   get "/watchlists" do
-    @watchlists = Watchlist.all
+    @users = User.all.sort_by {|user| user.username}
     erb :"/watchlists/index"
   end
   
   get "/watchlists/new" do
     if logged_in?
-      if Stock.all.empty?
-        @stocks = []
-      else 
-        @stocks = Stock.all.sort_by {|stock| stock.ticker.downcase}
-      end
+      Stock.all.empty? ? (@stocks = []) : (@stocks = Stock.all.sort_by {|stock| stock.ticker.downcase})
       erb :"/watchlists/new"
     else
       redirect '/'
@@ -19,7 +15,6 @@ class WatchlistsController < ApplicationController
   end
   
   post "/watchlists" do
-    # binding.pry
     if !params[:stock][:new_stock].empty?
       new_stock_ticker = params[:stock][:new_stock]
       if Stock.valid_ticker?(new_stock_ticker)
@@ -31,7 +26,8 @@ class WatchlistsController < ApplicationController
     end
   
     watchlist = Watchlist.create(name:params[:watchlist][:name])
-    
+    watchlist.stocks << new_stock
+
     if params[:watchlist][:stocks]
       stocks = params[:watchlist][:stocks]
       stocks.each do |ticker|

@@ -1,4 +1,6 @@
 <h1>Watchlists</h1>
-<% @watchlists.each do |watchlist| %>
-<li><%= "#{watchlist.user}'s Watchlists" %></li>
+<div class="watchlists-list">
+<% @users.each do |user| %>
+<li><a href="/users/<%=user.username%>"><%= "#{user.username.capitalize}'s Watchlists" %></a></li>
 <% end %>
+</div>
