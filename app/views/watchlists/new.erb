@@ -7,7 +7,8 @@
 
 <% unless Stock.all.empty? %>
 <label for="watchlist_stocks">Select Stocks from our Database to Add:</label>
-<select name="watchlist[stocks][]" id="watchlist_stocks">
+<br>
+<select name="watchlist[stocks][]" id="watchlist_stocks" multiple>
 <% Stock.all.each do |stock| %>
   <option value=<%=stock.ticker%>><%=stock.ticker.upcase%></option>
 <% end %>
