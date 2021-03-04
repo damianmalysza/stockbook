@@ -119,3 +119,17 @@ div.profile-edit {
 .footnote {
   font-size: .75rem;
 }
+
+.watchlists-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.watchlists-list li a:hover{
+  background-color: rgb(241, 241, 241);
+}
+
+.watchlists-list li {
+  padding-bottom: .25rem;
+  display: inline;
+}
