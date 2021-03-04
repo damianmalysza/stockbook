@@ -14,18 +14,31 @@ class WatchlistsController < ApplicationController
   end
   
   post "/watchlists" do
-    binding.pry
-    # check if new stock was entered
-    # if new stock was entered, check if ticker is valid
-    # if ticker isn't valid, create flash message, redirect user to new watchlist page
-    # if ticket is valid, create a new stock with that ticker
-
-    # create a new watchlist with the entered name
-    # add watchlist to the current_users's array of watchlists
-    # add selected stocks to watchlist's array of stocks
-    # save watchlist
-    # redirect user to user's profile page
-    redirect "/watchlists"
+    # binding.pry
+    if !params[:stock][:new_stock].empty?
+      new_stock_ticker = params[:stock][:new_stock]
+      if Stock.valid_ticker?(new_stock_ticker)
+        new_stock = Stock.create(ticker:new_stock_ticker)
+      else
+        flash[:message] = "Invalid ticker - please enter a valid ticker"
+        redirect '/watchlists/new'
+      end
+    end
+  
+    watchlist = Watchlist.create(name:params[:watchlist][:name])
+    
+    if params[:watchlist][:stocks]
+      stocks = params[:watchlist][:stocks]
+      stocks.each do |ticker|
+        stock = Stock.find_by(ticker:ticker)
+        watchlist.stocks << stock
+        watchlist.save
+      end
+    end
+    current_user.watchlists << watchlist
+    current_user.save
+  
+    redirect "/users/#{current_user.username}"
   end
   
   get "/watchlists/:id" do
