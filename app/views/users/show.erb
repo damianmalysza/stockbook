@@ -12,17 +12,7 @@
 <% if @user.watchlists.length != 0 %>
 <% @user.watchlists.each do |watchlist| %>
 <ul>
-<li><%=watchlist.name%>
-
-<% if watchlist.stocks != 0 %>
-<ul>
-  <% watchlist.stocks.sort_by {|stock| stock.ticker.downcase}.each do |stock| %>
-    <li><%=stock.ticker.upcase%> - $<%=stock.current_price%></li>
-  <% end %>
-  </ul>
-<% end %>
-
-</li>
+<li><a href="/watchlists/<%=watchlist.id%>"><%=watchlist.name%></a></li>
 </ul>
 <% end %>
 <% end %>
