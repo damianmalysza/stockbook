@@ -10,16 +10,14 @@
 <div class="stock-list">
 <% @watchlist.stocks.each do |stock| %>
 <div class="stock-list-card">
-  <% #stock_info = Stock.get_stock_info(stock.ticker)%>
-  <div class="stock-list-card-element title"><strong><%=stock.ticker%></strong> - <em><%=stock.company_name%></em></div>
-  <div class="stock-list-card-element main">Latest Price: </div>
-  <div class="stock-list-card-element side">P/E Ratio: </div>
-  <div class="stock-list-card-element main">Change %: </div>
-  <div class="stock-list-card-element side">Past Year Highest Price: </div>
-  <div class="stock-list-card-element main">Today's Highest Price: </div>
-  <div class="stock-list-card-element side">Past Year Lowest Price: </div>
-  <div class="stock-list-card-element main">Today's Lowest Price: </div>
-  <div class="stock-list-card-element side">Volume: </div>
+  <% stock_info = Stock.get_stock_info(stock.ticker)%>
+  <div class="stock-list-card-element title"><strong><%=stock.ticker%></strong> - <em><%=stock.company_name%></em> - $<%=stock.current_price%></div>
+  <div class="stock-list-card-element main">Today's Change %: <%=stock_info["change"].round(2)%>%</div>
+  <div class="stock-list-card-element side">Past Year Change: <%=(stock_info["ytdChange"] * 100).round(2)%>%</div>
+  <div class="stock-list-card-element main">Today's Highest Price: $<%=stock_info["high"].round(2)%></div>
+  <div class="stock-list-card-element side">Past Year Highest Price: $<%=stock_info["week52High"].round(2)%></div>
+  <div class="stock-list-card-element main">Today's Lowest Price: $<%=stock_info["low"].round(2)%></div>
+  <div class="stock-list-card-element side">Past Year Lowest Price: $<%=stock_info["week52High"].round(2)%></div>
 </div>
 <% end %>
 </div>

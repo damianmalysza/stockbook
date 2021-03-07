@@ -159,18 +159,22 @@ div.profile-edit {
 
 .stock-list-card {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, /*minmax(200px,*/ 1fr));
   border: 3px solid black;
   margin-bottom: 5px;
+  grid-column-gap: 5px;
+  /* min-width: 500px; */
 }
 
 .stock-list-card-element.title {
   font-size: 1.3em;
   grid-column: 1 / 3;
+  border-bottom: 2px solid black;
 }
 
 
 .stock-list-card-element {
+  padding: .25rem;
 }
 
 .stock-list-card-element.main {
@@ -180,7 +184,6 @@ div.profile-edit {
 
 .stock-list-card-element.side {
   grid-column: 2 / 3;
-  font-size: 0.8em;
 }
 
 .page-title {
