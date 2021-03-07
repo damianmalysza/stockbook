@@ -33,9 +33,8 @@ class WatchlistsController < ApplicationController
     # binding.pry
     watchlist = Watchlist.create(name:params[:watchlist][:name])
 
-    binding.pry
-
     if params[:watchlist][:stocks]
+
       stocks = params[:watchlist][:stocks]
       stocks.each do |ticker|
         stock = Stock.find_by(ticker:ticker.upcase)
