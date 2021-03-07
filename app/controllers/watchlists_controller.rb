@@ -15,24 +15,31 @@ class WatchlistsController < ApplicationController
   end
   
   post "/watchlists" do
+    # binding.pry
     if !params[:stock][:new_stock].empty?
-      new_stock_ticker = params[:stock][:new_stock]
+      new_stock_ticker = params[:stock][:new_stock].upcase
       if Stock.valid_ticker?(new_stock_ticker)
-        new_stock = Stock.create_new_stock(new_stock_ticker)
+        if Stock.find_by(ticker: new_stock_ticker)
+          params[:watchlist][:stocks] << new_stock_ticker
+        else
+          Stock.create_new_stock(new_stock_ticker)
+          params[:watchlist][:stocks] << new_stock_ticker
+        end
       else
         flash[:message] = "Invalid ticker - please enter a valid ticker"
         redirect '/watchlists/new'
       end
     end
-  
+    # binding.pry
     watchlist = Watchlist.create(name:params[:watchlist][:name])
-    watchlist.stocks << new_stock unless params[:stock][:new_stock].empty? 
+
+    binding.pry
 
     if params[:watchlist][:stocks]
       stocks = params[:watchlist][:stocks]
       stocks.each do |ticker|
-        stock = Stock.find_by(ticker:ticker)
-        watchlist.stocks << stock
+        stock = Stock.find_by(ticker:ticker.upcase)
+        watchlist.stocks << stock unless watchlist.stocks.include?(stock)
         watchlist.save
       end
     end
