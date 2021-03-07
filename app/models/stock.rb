@@ -6,17 +6,16 @@ class Stock < ActiveRecord::Base
 
   @@api_key = YAML.load_file('./api_key.yml')["api_key"]
 
-  base_uri "https://cloud.iexapis.com/stable/tops?token=#{@@api_key}&"
-
   def self.get_stock_info(ticker)
-    get("symbols=#{ticker}")
+    get("https://cloud.iexapis.com/stable/stock/#{ticker}/quote?token=#{@@api_key}")
   end
   
   def self.valid_ticker?(ticker)
-    !get_stock_info(ticker).empty?
+    !Stock.get_stock_info(ticker).parsed_response.include?("Unknown symbol")
   end
   
   def current_price
-    self.class.get_stock_info(self.ticker)[0]["lastSalePrice"].round(2)
+    # binding.pry
+    self.class.get_stock_info(self.ticker)["latestPrice"].round(2)
   end
 end
