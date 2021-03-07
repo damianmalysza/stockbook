@@ -13,9 +13,13 @@ class Stock < ActiveRecord::Base
   def self.valid_ticker?(ticker)
     !Stock.get_stock_info(ticker).parsed_response.include?("Unknown symbol")
   end
-  
+ 
+  def self.create_new_stock(ticker)
+    company_name = get_stock_info(ticker)["companyName"]
+    self.create(ticker: ticker, company_name: company_name)
+  end 
+
   def current_price
-    # binding.pry
     self.class.get_stock_info(self.ticker)["latestPrice"].round(2)
   end
 end

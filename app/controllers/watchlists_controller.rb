@@ -18,7 +18,7 @@ class WatchlistsController < ApplicationController
     if !params[:stock][:new_stock].empty?
       new_stock_ticker = params[:stock][:new_stock]
       if Stock.valid_ticker?(new_stock_ticker)
-        new_stock = Stock.create(ticker:new_stock_ticker)
+        new_stock = Stock.create_new_stock(new_stock_ticker)
       else
         flash[:message] = "Invalid ticker - please enter a valid ticker"
         redirect '/watchlists/new'
