@@ -55,7 +55,12 @@ class WatchlistsController < ApplicationController
   end
   
   get "/watchlists/:id/edit" do
-    erb :"/watchlists/edit"
+    @watchlist = Watchlist.find(params[:id])
+    if @watchlist.user == current_user
+      erb :"/watchlists/edit"
+    else
+      redirect '/'
+    end
   end
   
   patch "/watchlists/:id" do

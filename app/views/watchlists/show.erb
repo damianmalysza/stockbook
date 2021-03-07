@@ -1,11 +1,11 @@
-<div class="page-title"><h1><%=@watchlist.user.username.capitalize%> <em>>></em> <%=@watchlist.name%> Watchlist</h1>
+<div class="page-title"><h1><%=@watchlist.user.username.capitalize%> <em>>></em> <%=@watchlist.name%> Watchlist</h1></div>
 
 <% if @watchlist.user == current_user %>
-  <div class="profile-edit">
+  <div class="watchlist-info">
   <div><a href="/watchlists/<%=@watchlist.id%>/edit">Edit Watchlist</a></div>
   </div>
 <% end %>
-</div>
+
 
 <div class="stock-list">
 <% @watchlist.stocks.each do |stock| %>
