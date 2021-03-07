@@ -133,3 +133,8 @@ div.profile-edit {
   padding-bottom: .25rem;
   display: inline;
 }
+
+#watchlist_stocks {
+  height: 300px;
+  width: 75px;
+}
