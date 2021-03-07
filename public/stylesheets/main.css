@@ -108,6 +108,7 @@ div.profile-edit {
   right: 0;
   border: 2px solid black;
   text-align: center;
+  z-index: 1;
 }
 
 .profile-edit h3 {
