@@ -1,1 +1,53 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<div class="page-title"><h1><%=@watchlist.user.username.capitalize%> <em>>></em> <%=@watchlist.name%> Watchlist</h1></div>
+
+<div class="stock-list">
+<% @watchlist.stocks.each do |stock| %>
+<div class="stock-list-card">
+  <% #stock_info = Stock.get_stock_info(stock.ticker)%>
+  <div class="stock-list-card-element title"><strong><%=stock.ticker%></strong> - <em><%=stock.company_name%></em></div>
+  <div class="stock-list-card-element main">Latest Price: </div>
+  <div class="stock-list-card-element side">P/E Ratio: </div>
+  <div class="stock-list-card-element main">Change %: </div>
+  <div class="stock-list-card-element side">Past Year Highest Price: </div>
+  <div class="stock-list-card-element main">Today's Highest Price: </div>
+  <div class="stock-list-card-element side">Past Year Lowest Price: </div>
+  <div class="stock-list-card-element main">Today's Lowest Price: </div>
+  <div class="stock-list-card-element side">Volume: </div>
+</div>
+<% end %>
+</div>
+
+<%# {"symbol"=>"AAPL",
+ "companyName"=>"Apple Inc",
+ "primaryExchange"=>"NASDAQ/NGS (GLOBAL SELECT MARKET)",
+ "calculationPrice"=>"close",
+ "open"=>120.96,
+ "openTime"=>1614954601002,
+ "openSource"=>"official",
+ "close"=>121.42,
+ "closeTime"=>1614978000477,
+ "closeSource"=>"official",
+ "extendedPriceTime"=>1614992394562,
+ "previousClose"=>120.13,
+ "previousVolume"=>178154975,
+ "change"=>1.29,
+ "changePercent"=>0.01074,
+ "volume"=>153766601,
+ "iexMarketPercent"=>nil,
+ "iexVolume"=>nil,
+ "avgTotalVolume"=>108325070,
+ "iexBidPrice"=>nil,
+ "iexBidSize"=>nil,
+ "iexAskPrice"=>nil,
+ "iexAskSize"=>nil,
+ "iexOpen"=>121.31,
+ "iexOpenTime"=>1614977992376,
+ "iexClose"=>121.405,
+ "iexCloseTime"=>1614977999947,
+ "marketCap"=>2038410616320,
+ "peRatio"=>32.99,
+ "week52High"=>144.87,
+ "week52Low"=>52.74,
+ "ytdChange"=>-0.07282730972436066,
+ "lastTradeTime"=>1614977999947,
+ "isUSMarketOpen"=>false} %>

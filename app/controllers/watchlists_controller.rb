@@ -49,6 +49,8 @@ class WatchlistsController < ApplicationController
   end
   
   get "/watchlists/:id" do
+    @watchlist = Watchlist.find(params[:id])
+    # binding.pry
     erb :"/watchlists/show"
   end
   
