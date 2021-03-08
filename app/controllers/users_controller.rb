@@ -48,7 +48,11 @@ class UsersController < ApplicationController
   end
   
   get "/users/:username" do
-    @user = User.find_by(username:params[:username])
+    begin
+      @user = User.find_by(username:params[:username])
+    rescue
+      redirect '/'
+    end
     if @user
       erb :"/users/show"
     else 
@@ -57,7 +61,11 @@ class UsersController < ApplicationController
   end
   
   get "/users/:username/edit" do
-    @user = User.find_by(username:params[:username])
+    begin 
+      @user = User.find_by(username:params[:username])
+    rescue
+      redirect '/'
+    end
     if @user && @user == current_user
       erb :"/users/edit"
     else
@@ -80,8 +88,21 @@ class UsersController < ApplicationController
     end 
   end
   
-  delete "/users/:username/delete" do
-    redirect "/users"
+  get "/users/:username/delete" do
+    begin
+      user = User.find_by(username: params[:username])
+    rescue
+      redirect "/"
+    end
+    
+    if logged_in? && current_user = user
+      session.clear
+      user.delete 
+      redirect "/"
+    else 
+      redirect "/"
+    end
+    
   end
   
 end
