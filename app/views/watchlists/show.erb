@@ -13,11 +13,11 @@
 <div class="stock-list-card">
   <% stock_info = Stock.get_stock_info(stock.ticker)%>
   <div class="stock-list-card-element title"><strong><%=stock.ticker%></strong> - <em><%=stock.company_name%></em> - $<%=stock.current_price%></div>
-  <div class="stock-list-card-element main">Today's Change %: <%=stock_info["change"].round(2)%>%</div>
-  <div class="stock-list-card-element side">Past Year Change: <%=(stock_info["ytdChange"] * 100).round(2)%>%</div>
-  <div class="stock-list-card-element main">Previous Day Close Price: $<%=stock_info["previousClose"].round(2)%></div>
-  <div class="stock-list-card-element side">Past Year Highest Price: $<%=stock_info["week52High"].round(2)%></div>
-  <div class="stock-list-card-element side">Past Year Lowest Price: $<%=stock_info["week52Low"].round(2)%></div>
+  <div class="stock-list-card-element main">Today's Change: <%=stock.percent_change%>%</div>
+  <div class="stock-list-card-element side">Past Year Change: <%=(stock_info["ytdChange"] * 100).round(2) unless stock_info["ytdChange"] == nil%>%</div>
+  <div class="stock-list-card-element main">Previous Day Close Price: $<%=stock_info["previousClose"].round(2) unless stock_info["previousClose"] == nil%></div>
+  <div class="stock-list-card-element side">Past Year Highest Price: $<%=stock_info["week52High"].round(2) unless stock_info["week52High"] == nil%></div>
+  <div class="stock-list-card-element side">Past Year Lowest Price: $<%=stock_info["week52Low"].round(2) unless stock_info["week52Low"] == nil%></div>
 </div>
 <% end %>
 </div>

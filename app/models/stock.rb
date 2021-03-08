@@ -22,4 +22,12 @@ class Stock < ActiveRecord::Base
   def current_price
     self.class.get_stock_info(self.ticker)["latestPrice"].round(2)
   end
+
+  def previous_day_close
+    self.class.get_stock_info(self.ticker)["previousClose"].round(2)
+  end
+
+  def percent_change
+    (((self.current_price - self.previous_day_close)/self.current_price) * 100).round(2)
+  end
 end
