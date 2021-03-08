@@ -14,7 +14,7 @@ To install and use the application, you will need to do the following after clon
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/damianmalysza/cocktail_cli. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/damianmalysza/stockbook/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/damianmalysza/stockbook. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/damianmalysza/stockbook/blob/master/CODE_OF_CONDUCT.md).
 
 
 ## License
