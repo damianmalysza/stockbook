@@ -9,11 +9,11 @@
 <% end %>
 </div>
 <br>
-<div class="watchlist-container">
+<div class="watchlists-list">
 <% if @user.watchlists.length != 0 %>
 <% @user.watchlists.each do |watchlist| %>
 <ul>
-<li><a href="/watchlists/<%=watchlist.id%>"><%=watchlist.name%></a></li>
+<li><a href="/watchlists/<%=watchlist.id%>">- <%=watchlist.name%></a></li>
 </ul>
 <% end %>
 <% end %>

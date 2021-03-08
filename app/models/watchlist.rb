@@ -9,7 +9,7 @@ class Watchlist < ActiveRecord::Base
     
     if stock_count > 0
       self.stocks.each do |stock|
-        change =+ stock.percent_change
+        total_percent_change += stock.percent_change
       end
       (total_percent_change / stock_count).round(2)
     else

@@ -1,63 +1,35 @@
-<div class="page-title"><h1><%=@watchlist.user.username.capitalize%> <em>>></em> <%=@watchlist.name%> Watchlist</h1></div>
+<div class="page-title"><h1><%=@watchlist.user.username.capitalize%> <em>>></em> <%=@watchlist.name%> Watchlist</h1>
 
 <% if @watchlist.user == current_user %>
-  <div class="watchlist-info">
+  <div class="profile-edit">
+  <h3>Modify Watchlist</h3>
   <div><a href="/watchlists/<%=@watchlist.id%>/edit">Edit Watchlist</a></div>
   <div><a href="/watchlists/<%=@watchlist.id%>/delete">Delete Watchlist</a></div>
   </div>
 <% end %>
+</div>
 
+<div class="watchlist-info">
+<div><strong>Overall Change:</strong> <%=@watchlist.watchlist_avg_change%>% </div>
+<div><strong>Companies in Watchlist:</strong> <%=@watchlist.stocks.length%></div>
+</div>
 
 <div class="stock-list">
 <% @watchlist.stocks.each do |stock| %>
 <div class="stock-list-card">
   <% stock_info = Stock.get_stock_info(stock.ticker)%>
-  <div class="stock-list-card-element title"><strong><%=stock.ticker%></strong> - <em><%=stock.company_name%></em> - $<%=stock.current_price%></div>
-  <div class="stock-list-card-element main">Today's Change: <%if stock_info["percentChange"] == nil%>
+  <div class="stock-list-card-element title"><strong><%=stock.ticker%></strong> - <em><%=stock.company_name%></em></div>
+  <div class="stock-list-card-element">Current Price: $<%= stock_info["latestPrice"].round(2)%></div>
+  <div class="stock-list-card-element">Today's Change: <%if stock_info["percentChange"] == nil%>
   <%=stock.percent_change%>%
   <% else %>
   <%=(stock_info["changePercent"] * 100).round(2)%>
   <%end%>
   </div>
-  <div class="stock-list-card-element side">Past Year Change: <%=(stock_info["ytdChange"] * 100).round(2) unless stock_info["ytdChange"] == nil%>%</div>
-  <div class="stock-list-card-element main">Previous Day Close Price: $<%=stock_info["previousClose"].round(2) unless stock_info["previousClose"] == nil%></div>
-  <div class="stock-list-card-element side">Past Year Highest Price: $<%=stock_info["week52High"].round(2) unless stock_info["week52High"] == nil%></div>
-  <div class="stock-list-card-element side">Past Year Lowest Price: $<%=stock_info["week52Low"].round(2) unless stock_info["week52Low"] == nil%></div>
+  <div class="stock-list-card-element">Past Year Change: <%=(stock_info["ytdChange"] * 100).round(2) unless stock_info["ytdChange"] == nil%>%</div>
+  <div class="stock-list-card-element">Previous Day Close Price: $<%=stock_info["previousClose"].round(2) unless stock_info["previousClose"] == nil%></div>
+  <div class="stock-list-card-element">Past Year Highest Price: $<%=stock_info["week52High"].round(2) unless stock_info["week52High"] == nil%></div>
+  <div class="stock-list-card-element">Past Year Lowest Price: $<%=stock_info["week52Low"].round(2) unless stock_info["week52Low"] == nil%></div>
 </div>
 <% end %>
 </div>
-
-<%# {"symbol"=>"AAPL",
- "companyName"=>"Apple Inc",
- "primaryExchange"=>"NASDAQ/NGS (GLOBAL SELECT MARKET)",
- "calculationPrice"=>"close",
- "open"=>120.96,
- "openTime"=>1614954601002,
- "openSource"=>"official",
- "close"=>121.42,
- "closeTime"=>1614978000477,
- "closeSource"=>"official",
- "extendedPriceTime"=>1614992394562,
- "previousClose"=>120.13,
- "previousVolume"=>178154975,
- "change"=>1.29,
- "changePercent"=>0.01074,
- "volume"=>153766601,
- "iexMarketPercent"=>nil,
- "iexVolume"=>nil,
- "avgTotalVolume"=>108325070,
- "iexBidPrice"=>nil,
- "iexBidSize"=>nil,
- "iexAskPrice"=>nil,
- "iexAskSize"=>nil,
- "iexOpen"=>121.31,
- "iexOpenTime"=>1614977992376,
- "iexClose"=>121.405,
- "iexCloseTime"=>1614977999947,
- "marketCap"=>2038410616320,
- "peRatio"=>32.99,
- "week52High"=>144.87,
- "week52Low"=>52.74,
- "ytdChange"=>-0.07282730972436066,
- "lastTradeTime"=>1614977999947,
- "isUSMarketOpen"=>false} %>
