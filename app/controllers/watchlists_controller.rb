@@ -84,7 +84,7 @@ class WatchlistsController < ApplicationController
     end
 
     if params[:stock_additions].length != 0
-      params[:stock_additions].each do |stock|
+      params[:stock_additions].uniq.each do |stock|
         stock_to_add = Stock.find_by(ticker:stock)
         watchlist.stocks << stock_to_add
       end
