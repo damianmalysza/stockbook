@@ -1,1 +1,36 @@
-<div class="page-title"><h1>Edit <%=@watchlist.user.username.capitalize%> <em>>></em> <%= @watchlist.name%></h1></div>
+<div class="page-title"><h1>Editing <%=@watchlist.user.username.capitalize%> <em>>></em> <%= @watchlist.name%></h1></div>
+<form action="/watchlists/<%=@watchlist.id%>" method="post">
+<input type="hidden" name="_method" value="patch">
+<%# a user is going to want to remove stocks from the watchlist %>
+<h3>Stock Removal</h3>
+<label for="stock_removals">Select stocks to remove from your watchlist:</label>
+<br>
+<select name="stock_removals[]" id="stock_removals" multiple>
+<% @removeable_stocks.each do |stock| %>
+  <option value=<%=stock.ticker%>><%=stock.ticker.upcase%></option>
+<% end %>
+</select>
+<br>
+<%# a user is going to want to add stocks to the watchlist %>
+<h3>Stock Addition</h3>
+<%# a user is going to want to add new stocks to their watchlist %>
+<label for="stock_addtions">Select Stocks from our Database to Add:</label>
+<br>
+<select name="stock_additions[]" id="stock_additions" multiple>
+<% @addable_stocks.each do |stock| %>
+  <option value=<%=stock.ticker%>><%=stock.ticker.upcase%></option>
+<% end %>
+</select>
+<br>
+<span class="footnote"><em>Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.</em></span>
+<br>
+<br>
+<% if flash.has?(:message) %>
+  <div id="flash-message"><%= flash[:message]%></div>
+<% end %>
+<br>
+<label for="new_stock">If your stock isn't listed above, you can add it here (use ticker name):</label>
+<input type="text" name="new_stock" id="new_stock">
+<br>
+<input type="submit" value="Update Watchlist">
+</form>

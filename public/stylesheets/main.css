@@ -218,3 +218,7 @@ h1 {
 .watchlist-info:hover {
   background-color: rgb(241, 241, 241); 
 }
+
+h3 {
+  margin-bottom: 0;
+}

@@ -32,9 +32,9 @@ class WatchlistsController < ApplicationController
     end
     # binding.pry
     watchlist = Watchlist.create(name:params[:watchlist][:name])
-
+    
     if params[:watchlist][:stocks]
-
+      
       stocks = params[:watchlist][:stocks]
       stocks.each do |ticker|
         stock = Stock.find_by(ticker:ticker.upcase)
@@ -44,7 +44,7 @@ class WatchlistsController < ApplicationController
     end
     current_user.watchlists << watchlist
     current_user.save
-  
+    
     redirect "/users/#{current_user.username}"
   end
   
@@ -56,6 +56,8 @@ class WatchlistsController < ApplicationController
   
   get "/watchlists/:id/edit" do
     @watchlist = Watchlist.find(params[:id])
+    @addable_stocks = Stock.all.select {|stock| !@watchlist.stocks.include?(stock)}
+    @removeable_stocks = @watchlist.stocks
     if @watchlist.user == current_user
       erb :"/watchlists/edit"
     else
@@ -64,7 +66,41 @@ class WatchlistsController < ApplicationController
   end
   
   patch "/watchlists/:id" do
-    redirect "/watchlists/:id"
+    watchlist = Watchlist.find(params[:id])
+    params[:stock_additions] = [] unless params[:stock_additions]
+    if !params[:new_stock].empty?
+      new_stock_ticker = params[:new_stock].upcase
+      if Stock.valid_ticker?(new_stock_ticker)
+        if Stock.find_by(ticker: new_stock_ticker)
+          params[:stock_additions] << new_stock_ticker
+        else
+          Stock.create_new_stock(new_stock_ticker)
+          params[:stock_additions] << new_stock_ticker
+        end
+      else
+        flash[:message] = "Invalid ticker - please enter a valid ticker"
+        redirect "/watchlists/#{params[:id]}/edit"
+      end
+    end
+
+    if params[:stock_additions].length != 0
+      params[:stock_additions].each do |stock|
+        stock_to_add = Stock.find_by(ticker:stock)
+        watchlist.stocks << stock_to_add
+      end
+    end
+    
+    if params[:stock_removals]
+      params[:stock_removals].each do |stock|
+        stock = Stock.find_by(ticker:stock)
+        stock_to_remove = StockWatchlist.where(watchlist_id:watchlist.id,stock_id: stock.id) 
+        StockWatchlist.delete(stock_to_remove.ids.first)
+      end
+    end
+    
+    watchlist.save
+    
+    redirect "/watchlists/#{params[:id]}"
   end
   
   delete "/watchlists/:id/delete" do
