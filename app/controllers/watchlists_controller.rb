@@ -16,7 +16,7 @@ class WatchlistsController < ApplicationController
   
   post "/watchlists" do
     if !params[:stock][:new_stock].empty?
-      new_stock_ticker = params[:stock][:new_stock].upcase
+      new_stock_ticker = params[:stock][:new_stock].gsub(" ","").upcase
       if Stock.valid_ticker?(new_stock_ticker)
         if Stock.find_by(ticker: new_stock_ticker)
           params[:watchlist][:stocks] << new_stock_ticker
@@ -76,7 +76,7 @@ class WatchlistsController < ApplicationController
     watchlist = Watchlist.find(params[:id])
     params[:stock_additions] = [] unless params[:stock_additions]
     if !params[:new_stock].empty?
-      new_stock_ticker = params[:new_stock].upcase
+      new_stock_ticker = params[:new_stock].gsub(" ","").upcase
       if Stock.valid_ticker?(new_stock_ticker)
         if Stock.find_by(ticker: new_stock_ticker)
           params[:stock_additions] << new_stock_ticker
