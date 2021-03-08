@@ -55,7 +55,6 @@ class WatchlistsController < ApplicationController
       redirect '/'
     end
     
-    @watchlist = Watchlist.find(params[:id])
     # binding.pry
     erb :"/watchlists/show"
   end
