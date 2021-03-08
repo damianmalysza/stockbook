@@ -49,19 +49,30 @@ class WatchlistsController < ApplicationController
   end
   
   get "/watchlists/:id" do
+    begin
+      @watchlist = Watchlist.find(params[:id])
+    rescue
+      redirect '/'
+    end
+    
     @watchlist = Watchlist.find(params[:id])
     # binding.pry
     erb :"/watchlists/show"
   end
   
   get "/watchlists/:id/edit" do
-    @watchlist = Watchlist.find(params[:id])
-    @addable_stocks = Stock.all.select {|stock| !@watchlist.stocks.include?(stock)}
-    @removeable_stocks = @watchlist.stocks
+    begin
+      @watchlist = Watchlist.find(params[:id])
+    rescue
+      redirect '/watchlists'
+    end
+    
     if @watchlist.user == current_user
+      @addable_stocks = Stock.all.select {|stock| !@watchlist.stocks.include?(stock)}
+      @removeable_stocks = @watchlist.stocks
       erb :"/watchlists/edit"
     else
-      redirect '/'
+      redirect '/watchlists'
     end
   end
   
@@ -104,10 +115,16 @@ class WatchlistsController < ApplicationController
   end
   
   get "/watchlists/:id/delete" do
-    watchlist = Watchlist.find(params[:id])
+    begin
+      watchlist = Watchlist.find(params[:id])
+    rescue
+      redirect '/watchlists'
+    end
+
     if logged_in? && current_user.id == watchlist.user.id
+      username = watchlist.user.username
       watchlist.delete
-      redirect "/watchlists"
+      redirect "/users/#{username}"
     else
       redirect "/watchlists"
     end
