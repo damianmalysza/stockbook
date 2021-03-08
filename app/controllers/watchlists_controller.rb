@@ -15,7 +15,6 @@ class WatchlistsController < ApplicationController
   end
   
   post "/watchlists" do
-    # binding.pry
     if !params[:stock][:new_stock].empty?
       new_stock_ticker = params[:stock][:new_stock].upcase
       if Stock.valid_ticker?(new_stock_ticker)
@@ -30,7 +29,6 @@ class WatchlistsController < ApplicationController
         redirect '/watchlists/new'
       end
     end
-    # binding.pry
     watchlist = Watchlist.create(name:params[:watchlist][:name])
     
     if params[:watchlist][:stocks]
@@ -55,7 +53,6 @@ class WatchlistsController < ApplicationController
       redirect '/'
     end
     
-    # binding.pry
     erb :"/watchlists/show"
   end
   
