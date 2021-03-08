@@ -11,7 +11,7 @@ Specs:
 - [x] Ensure that users can't modify content created by other users -- User can only modify content that belongs to them
 - [x] Include user input validations -- Validation is used on all user entered data
 - [x] BONUS - not required - Display validation failures to user with error message (example form URL e.g. /posts/new) -- Validation failures are displayed via flash messages
-- [] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code -
+- [x] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code - Readme contains short description, install instructions, contributors guide and link to license
 
 Confirm
 - [x] You have a large number of small Git commits
