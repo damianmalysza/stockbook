@@ -215,7 +215,7 @@ h1 {
   margin-bottom: .5rem;
 }
 
-.watchlist-info:hover {
+.watchlist-info>div:hover {
   background-color: rgb(241, 241, 241); 
 }
 

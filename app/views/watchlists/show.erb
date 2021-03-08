@@ -3,6 +3,7 @@
 <% if @watchlist.user == current_user %>
   <div class="watchlist-info">
   <div><a href="/watchlists/<%=@watchlist.id%>/edit">Edit Watchlist</a></div>
+  <div><a href="/watchlists/<%=@watchlist.id%>/delete">Delete Watchlist</a></div>
   </div>
 <% end %>
 

@@ -103,7 +103,13 @@ class WatchlistsController < ApplicationController
     redirect "/watchlists/#{params[:id]}"
   end
   
-  delete "/watchlists/:id/delete" do
-    redirect "/watchlists"
+  get "/watchlists/:id/delete" do
+    watchlist = Watchlist.find(params[:id])
+    if logged_in? && current_user.id == watchlist.user.id
+      watchlist.delete
+      redirect "/watchlists"
+    else
+      redirect "/watchlists"
+    end
   end
 end
